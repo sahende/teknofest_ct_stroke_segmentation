@@ -1,8 +1,7 @@
 --extra-index-url https://download.pytorch.org/whl/cu118
-torch==2.6.0
-torchvision==0.21.0
+torch==2.6.0+cu118
+torchvision==0.21.0+cu118
 transformers==4.33.3
-tqdm==4.67.1
 scikit-learn==1.6.1
 tqdm==4.67.1
 Pillow==11.1.0
