@@ -80,7 +80,10 @@ You can download the trained segmentation model from **Hugging Face**:
 
 - **Model URL:** [Sahende/teknofest_ct_stroke_seg](https://huggingface.co/Sahende/teknofest_ct_stroke_seg)
 
-
+**(Optional) For faster model downloads from Hugging Face**
+```bash
+pip install "huggingface_hub[hf_xet]"
+```
 ## 📦 Installation
 
 ### Create virtual environment
