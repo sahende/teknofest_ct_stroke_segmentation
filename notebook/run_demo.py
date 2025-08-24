@@ -22,11 +22,11 @@ device = torch.device(cfg.DEVICE)
 # -------------------------
 # Init model (same config as training)
 model = SwinUPerNetCBAM(
-    backbone_name=cfg.BACKBONE,  # cfg.BACKBONE_NAME yerine cfg.BACKBONE
+    backbone_name=cfg.BACKBONE,  
     num_classes=cfg.NUM_CLASSES,
-    fpn_dim=cfg.FP_DIM,          # cfg.FPN_DIM yerine cfg.FP_DIM
+    fpn_dim=cfg.FP_DIM,          
     ppm_out=cfg.PPM_OUT,
-    pretrained=cfg.PRETRAINED    # cfg.PRETRAINED_BACKBONE yerine cfg.PRETRAINED
+    pretrained=cfg.PRETRAINED    
 ).to(cfg.DEVICE)
 
 
@@ -60,3 +60,4 @@ print(f"\n✅ Test Result -> Dice={avg_dice:.4f}, F1={f1:.4f}, IoU={iou:.4f}")
 # =====================================================
 # from src.train import train
 # train()
+
