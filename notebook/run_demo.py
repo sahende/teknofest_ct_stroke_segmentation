@@ -1,7 +1,7 @@
 # notebook/run_eval.py
-# ==================================
-# 🔹 Run evaluation with TTA & Dice
-# ==================================
+# ====================================================
+# 🔹 Run evaluation with TTA & Dice and visualizition
+# ====================================================
 
 
 import sys, os
@@ -14,6 +14,10 @@ from huggingface_hub import hf_hub_download
 from src.evaluate import run_evaluation
 from model.swin_upernet_cbam import SwinUPerNetCBAM
 import src.config as cfg
+from utils.visualization import visualize_batch
+from data.dataset import SegmentationDataset
+from torch.utils.data import DataLoader
+from data.transforms import get_transforms
 
 # -------------------------
 # Device
@@ -54,10 +58,26 @@ avg_dice, f1, iou = run_evaluation(
 
 print(f"\n✅ Test Result -> Dice={avg_dice:.4f}, F1={f1:.4f}, IoU={iou:.4f}")
 
+# Load transforms
+_, val_transform = get_transforms()
+# -------------------------
+# Prepare test dataset + dataloader
+test_dataset = SegmentationDataset(
+    image_dir=cfg.TEST_IMG_DIR,
+    mask_dir=cfg.TEST_MASK_DIR,
+    transform=val_transform # augmentations are not needed for visualization
+)
+
+test_loader = DataLoader(test_dataset, batch_size=4, shuffle=False)
+
+# -------------------------
+# Visualize predictions
+print("🔍 Visualizing predictions for one batch...")
+visualize_batch(test_loader, model=model, device=device, batch_index=0, max_samples=5)
+
 
 # =====================================================
 #  (Optional) Run training instead of evaluation
 # =====================================================
 # from src.train import train
 # train()
-
